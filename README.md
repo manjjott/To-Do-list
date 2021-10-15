@@ -1,18 +1,12 @@
-# My Fitness Calculator
+# _Work List_
 
->## Outline
->***My Fitness Calculator*** is a programme that allows a user to keep track of his calorie consumption on a daily basis. It allows the user to add food to any of the meals during the day, as well as remove food from any of the meals. Add the calories that have been allotted to the specific food. Calculate total calories consumed at the end of the day by editing the calories allotted to each item.
-People who desire to keep track of their health on a daily basis might employ this initiative. This idea appeals to me since it will assist many individuals in keeping track of what they consume in a thoughtful manner. This is a more *practical* and *helpful* project.
-
->## User Stories
->> ### Phase1
+>## _Outline_
+>The user may add numerous to-do tasks to the list using the ***Work List*** feature. It allows you to add work to the list, browse the list, and check off items on the list. On the list, we may even see unfinished tasks. This list may be utilised by a variety of professionals and students who wish to finish their job in a methodical manner. It aids in reminding them of any remaining tasks.
+>## _User Stories_
+>> ### _Phase1_
 >><ol>
->><li> Able to set total calories for the day </li>
->><li> Add a food to any meal </li>
->><li> Add calories tot the food</li>
->><li> Remove any food from the meal</li>
->><li> Add calories to the food</li>
->><li>Edit calories to the food that is added</li>
->><li> Calculate total calories at the day end</li>
->><li> Give any deficit or surplus indication </li>
+>><li> Able to add work on the list </li>
+>><li> Able to view any work in the list</li>
+>><li>Able to mark work completed on the list</li>
+>><li>Able to delete any work from the list</li>
 >></ol>
