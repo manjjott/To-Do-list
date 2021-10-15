@@ -22,7 +22,7 @@ public class Work {
         return completed;
     }
 
-   public int getTime() {
+    public int getTime() {
 
         return time;
     }

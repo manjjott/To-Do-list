@@ -18,22 +18,23 @@ public class WorkToDoTest {
     public void runBefore() {
         physics = new Work("physics", 2);
         maths = new Work("maths", 3);
-        chemistry = new Work( "chemistry", 2);
+        chemistry = new Work("chemistry", 2);
 
         lists = new WorkToDo();
     }
 
     @Test
 
-    public void testAddWork(){
+    public void testAddWork() {
 
         lists.addWork(physics);
         lists.addWork(chemistry);
 
         assertEquals(2, lists.sizeOfList());
     }
+
     @Test
-    public void testDeleteWork(){
+    public void testDeleteWork() {
         lists.addWork(physics);
         lists.addWork(maths);
         lists.addWork(chemistry);
@@ -44,7 +45,7 @@ public class WorkToDoTest {
 
     @Test
 
-    public void testMarkComplete(){
+    public void testMarkComplete() {
         lists.addWork(physics);
         lists.addWork(chemistry);
         lists.addWork(maths);
@@ -55,19 +56,16 @@ public class WorkToDoTest {
 
     @Test
 
-    public void testGetWork(){
+    public void testGetWork() {
         lists.addWork(physics);
         lists.addWork(maths);
         lists.addWork(chemistry);
         assertEquals(3, lists.sizeOfList());
-        assertEquals(chemistry , lists.getWork(2));
+        assertEquals(chemistry, lists.getWork(2));
     }
 
 
-
-
-
-    }
+}
 
 
 

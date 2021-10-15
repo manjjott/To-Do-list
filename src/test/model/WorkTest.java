@@ -16,16 +16,17 @@ public class WorkTest {
 
     public void runBefore() {
         physics = new Work("physics", 3);
-        maths = new Work("maths",2);
-        chemistry= new Work("chemistry", 1);
+        maths = new Work("maths", 2);
+        chemistry = new Work("chemistry", 1);
 
     }
+
     @Test
 
-    public void testGetTime(){
-        assertEquals(3,physics.getTime());
+    public void testGetTime() {
+        assertEquals(3, physics.getTime());
         assertEquals(2, maths.getTime());
-        assertEquals(1,chemistry.getTime());
+        assertEquals(1, chemistry.getTime());
     }
 
 }
