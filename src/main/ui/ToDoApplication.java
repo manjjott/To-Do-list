@@ -78,6 +78,11 @@ public class ToDoApplication {
                 toBeCompleted = work;
             }
         }
+        if (!contains) {
+            System.out.println("Error: Work entered not in the list");
+        } else {
+            workToDo.markComplete(toBeCompleted.getName());
+        }
     }
 
     private void deleteWork() {
@@ -124,8 +129,6 @@ public class ToDoApplication {
         System.out.println("To delete work enter : Delete");
         System.out.println("To mark a work as complete : Complete ");
         System.out.println("To see number of incomplete and complete work on list : Check");
-
-
 
     }
 
