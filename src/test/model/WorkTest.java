@@ -24,6 +24,9 @@ public class WorkTest {
     @Test
 
     public void testGetTime() {
+        physics.getTime();
+        chemistry.getTime();
+        maths.getTime();
         assertEquals(3, physics.getTime());
         assertEquals(2, maths.getTime());
         assertEquals(1, chemistry.getTime());
