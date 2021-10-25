@@ -74,9 +74,8 @@ public class WorkToDoTest {
         lists.addWork(physics);
         lists.addWork(chemistry);
         lists.addWork(maths);
-        lists.getWorks();
-
-        assertEquals(3, lists.sizeOfList());
+       // lists.getWorks();
+        assertEquals(3, lists.getWorks().size());
     }
 
 }
