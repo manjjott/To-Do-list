@@ -40,6 +40,8 @@ public class ToDoApplication {
             completeWork();
         } else if (decision.equals("Check")) {
             checkWork();
+        } else if (decision.equals("View")) {
+            viewWork();
         }
 
     }
@@ -127,6 +129,15 @@ public class ToDoApplication {
         start();
     }
 
+
+    private void viewWork() {
+        for (Work work : workToDo.getWorks()) {
+            System.out.println("Name: " + work.getName() + " Time: " + work.getTime()
+                    + " Completed?: " + work.isCompleted());
+        }
+        start();
+    }
+
     //EFFECTS: displays the menu for the user
     private void menu() {
         System.out.println("Choose an option");
@@ -134,6 +145,7 @@ public class ToDoApplication {
         System.out.println("To delete work enter : Delete");
         System.out.println("To mark a work as complete : Complete ");
         System.out.println("To see number of incomplete and complete work on list : Check");
+        System.out.println("To view any work on the To-Do list: View");
 
     }
 

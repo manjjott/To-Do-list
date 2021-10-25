@@ -10,3 +10,10 @@
 >><li>Able to mark work completed on the list</li>
 >><li>Able to delete any work from the list</li>
 >></ol>
+
+>>### _Phase 2_
+>><ol>
+>><li> Able to add view work functionality </li>
+>><li> Able to save my works to a file </li>
+>><li> Able to load my works from file</li>
+>></ol> 
