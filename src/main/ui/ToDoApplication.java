@@ -86,6 +86,7 @@ public class ToDoApplication {
         } else {
             workToDo.markComplete(toBeCompleted.getName());
         }
+        start();
     }
 
     //EFFECTS: lets the user delete certain work from the list

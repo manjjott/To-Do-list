@@ -34,5 +34,4 @@ public class Work {
     public void completeWork() {
         this.completed = true;
     }
-
 }

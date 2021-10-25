@@ -48,7 +48,6 @@ public class WorkToDo {
 
     //EFFECTS: returns the work from the list of work
     public Work getWork(int i) {
-
         return workList.get(i);
 
     }
@@ -57,6 +56,5 @@ public class WorkToDo {
     public List<Work> getWorks() {
         return workList;
     }
-
 
 }
