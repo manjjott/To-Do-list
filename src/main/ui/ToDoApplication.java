@@ -2,18 +2,27 @@ package ui;
 
 import model.Work;
 import model.WorkToDo;
+import persistence.Reader;
+import persistence.Writer;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // This class is for the user interaction purposes
 public class ToDoApplication {
 
+    private static final String JSON_STORE = "./data/worktodo.json";
     private WorkToDo workToDo;
-    Scanner myObj = new Scanner(System.in);
+    private Scanner myObj  = new Scanner(System.in);
+    private Writer jsonWriter;
+    private Reader jsonReader;
 
 
-    public ToDoApplication() {
+    public ToDoApplication() throws FileNotFoundException {
         workToDo = new WorkToDo();
+        jsonWriter = new Writer(JSON_STORE);
+        jsonReader = new Reader(JSON_STORE);
         welcome();
         start();
     }
@@ -42,6 +51,12 @@ public class ToDoApplication {
             checkWork();
         } else if (decision.equals("View")) {
             viewWork();
+        } else if (decision.equals("Save")) {
+            saveWork();
+        } else if (decision.equals("Load")) {
+            loadWork();
+        } else if (decision.equals("Exit")) {
+            System.out.println("Bye");
         }
 
     }
@@ -138,14 +153,39 @@ public class ToDoApplication {
         start();
     }
 
+    private void saveWork() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(workToDo);
+            jsonWriter.close();
+            System.out.println("Saved " + workToDo + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+        start();
+    }
+
+    public void loadWork() {
+        try {
+            workToDo = jsonReader.read();
+            System.out.println("Loaded " + workToDo + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+        start();
+    }
+
     //EFFECTS: displays the menu for the user
     private void menu() {
         System.out.println("Choose an option");
-        System.out.println("To add a work enter : Add");
-        System.out.println("To delete work enter : Delete");
-        System.out.println("To mark a work as complete : Complete ");
-        System.out.println("To see number of incomplete and complete work on list : Check");
-        System.out.println("To view any work on the To-Do list: View");
+        System.out.println("Add: To add a work enter");
+        System.out.println("Delete: To delete work enter");
+        System.out.println("Complete: To mark a work as complete ");
+        System.out.println("Check: To see number of incomplete and complete work on list");
+        System.out.println("View: To view any work on the To-Do list");
+        System.out.println("Save: Save file");
+        System.out.println("Load: Load file");
+        System.out.println("Exit");
 
     }
 

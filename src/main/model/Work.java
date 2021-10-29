@@ -1,6 +1,9 @@
 package model;
 
-public class Work {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Work implements Writable {
 
     //This is the single item in the work to do
     private String name;
@@ -16,7 +19,6 @@ public class Work {
 
     //EFFECTS: Returns the name of the task
     public String getName() {
-
         return name;
     }
 
@@ -33,5 +35,14 @@ public class Work {
     //EFFECTS: Mark any work as true
     public void completeWork() {
         this.completed = true;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("time",time);
+        json.put("completed", isCompleted());
+        return json;
     }
 }

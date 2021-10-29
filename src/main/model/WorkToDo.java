@@ -1,16 +1,22 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkToDo {
-
+public class WorkToDo implements Writable {
+    String name;
     List<Work> workList;
 
     // This is the list of various works that user need to dealt with
     public WorkToDo() {
         workList = new ArrayList<>();
     }
+
+
 
     //MODIFIES: this
     //EFFECTS: Add the work into the work to do list
@@ -57,4 +63,20 @@ public class WorkToDo {
         return workList;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Work To Do",toDoListToJson());
+        return json;
+    }
+
+    public JSONArray toDoListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Work w : workList) {
+            jsonArray.put(w.toJson());
+        }
+        return jsonArray;
+
+    }
 }
