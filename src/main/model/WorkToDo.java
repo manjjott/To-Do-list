@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkToDo implements Writable {
-    String name;
     List<Work> workList;
 
     // This is the list of various works that user need to dealt with
@@ -72,7 +71,6 @@ public class WorkToDo implements Writable {
 
     public JSONArray toDoListToJson() {
         JSONArray jsonArray = new JSONArray();
-
         for (Work w : workList) {
             jsonArray.put(w.toJson());
         }

@@ -44,8 +44,8 @@ public class WriterTest extends JsonTest{
     void testWriterGeneralWorkroom() {
         try {
             WorkToDo wr = new WorkToDo();
-            wr.addWork(new Work("ghussa", 100));
-            wr.addWork(new Work("fudu", 69));
+            wr.addWork(new Work("a", 100));
+            wr.addWork(new Work("b", 69));
             Writer writer = new Writer("./data/testWriterGeneral.json");
             writer.open();
             writer.write(wr);
@@ -55,9 +55,9 @@ public class WriterTest extends JsonTest{
             wr = reader.read();
             List<Work> wl = wr.getWorks();
             assertEquals(2, wl.size());
-            checkWork("ghussa", 100, wl.get(0));
+            checkWork("a", 100, wl.get(0));
             assertFalse(wl.get(0).isCompleted());
-            checkWork("fudu", 69, wl.get(1));
+            checkWork("b", 69, wl.get(1));
             wl.get(1).completeWork();
             assertTrue(wl.get(1).isCompleted());
 
