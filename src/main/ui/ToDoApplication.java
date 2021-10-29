@@ -14,7 +14,7 @@ public class ToDoApplication {
 
     private static final String JSON_STORE = "./data/worktodo.json";
     private WorkToDo workToDo;
-    private Scanner myObj  = new Scanner(System.in);
+    private Scanner myObj = new Scanner(System.in);
     private Writer jsonWriter;
     private Reader jsonReader;
 
@@ -144,7 +144,7 @@ public class ToDoApplication {
         start();
     }
 
-
+    //EFFECTS: view the work in the list
     private void viewWork() {
         for (Work work : workToDo.getWorks()) {
             System.out.println("Name: " + work.getName() + " Time: " + work.getTime()
@@ -153,6 +153,7 @@ public class ToDoApplication {
         start();
     }
 
+    //EFFECTS: save the worktodo to file
     private void saveWork() {
         try {
             jsonWriter.open();
@@ -165,6 +166,8 @@ public class ToDoApplication {
         start();
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads worktodo from file
     public void loadWork() {
         try {
             workToDo = jsonReader.read();
@@ -185,7 +188,7 @@ public class ToDoApplication {
         System.out.println("View: To view any work on the To-Do list");
         System.out.println("Save: Save file");
         System.out.println("Load: Load file");
-        System.out.println("Exit");
+        System.out.println("Exit: To exit the To-Do Application");
 
     }
 

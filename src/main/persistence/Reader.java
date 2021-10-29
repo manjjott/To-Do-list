@@ -13,17 +13,17 @@ import java.util.stream.Stream;
 
 // Represents a reader that reads workroom from JSON data stored in file
 public class Reader {
-    private String source;
+    private String origin;
 
     // EFFECTS: constructs reader to read from source file
     public Reader(String source) {
-        this.source = source;
+        this.origin = source;
     }
 
     // EFFECTS: reads workroom from file and returns it;
     // throws IOException if an error occurs reading data from file
     public WorkToDo read() throws IOException {
-        String jsonData = readFile(source);
+        String jsonData = readFile(origin);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseWorkToDo(jsonObject);
     }
@@ -46,7 +46,7 @@ public class Reader {
         return wtd;
     }
 
-    // MODIFIES: wr
+    // MODIFIES: wtd
     // EFFECTS: parses thingies from JSON object and adds them to workroom
     private void addWorks(WorkToDo wtd, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Work To Do");
@@ -56,7 +56,7 @@ public class Reader {
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: wtd
     // EFFECTS: parses thingy from JSON object and adds it to workroom
     private void addWork(WorkToDo wtd, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
