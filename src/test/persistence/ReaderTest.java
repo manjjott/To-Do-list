@@ -23,7 +23,7 @@ public class ReaderTest extends JsonTest{
     }
 
     @Test
-    void testReaderEmptyWorkRoom() {
+    void testReaderEmptyWorkToDo() {
         Reader reader = new Reader("./data/testReaderEmpty.json");
         try {
             WorkToDo wtd = reader.read();
@@ -34,7 +34,7 @@ public class ReaderTest extends JsonTest{
     }
 
     @Test
-    void testReaderGeneralWorkRoom() {
+    void testReaderGeneralWorkToDo() {
         Reader reader = new Reader("./data/testReaderGeneral.json");
         try {
             WorkToDo wr = reader.read();

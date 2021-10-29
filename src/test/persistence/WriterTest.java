@@ -24,7 +24,7 @@ public class WriterTest extends JsonTest{
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyWorkToDo() {
         try {
             WorkToDo wr = new WorkToDo();
             Writer writer = new Writer("./data/testWriterEmpty.json");
@@ -41,7 +41,7 @@ public class WriterTest extends JsonTest{
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralWorkToDo() {
         try {
             WorkToDo wr = new WorkToDo();
             wr.addWork(new Work("a", 100));
