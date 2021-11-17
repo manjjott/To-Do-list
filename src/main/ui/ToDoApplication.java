@@ -56,7 +56,8 @@ public class ToDoApplication {
         } else if (decision.equals("Load")) {
             loadWork();
         } else if (decision.equals("Exit")) {
-            System.out.println("Bye");
+            System.out.println("Bye!!");
+            saveWork();
         }
 
     }
