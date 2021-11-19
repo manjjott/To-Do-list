@@ -130,16 +130,17 @@ public class GUI implements ActionListener {
     //REQUIRES: add different work everytime
     //EFFECTS: adds work with name, duration
     private void add() {
-        photo();
         int i = Integer.parseInt(duration.getText());
         Work work = new Work(name.getText(), i);
         wl.addWork(work);
+
         for (Work w : wl.getWorks()) {
             if (w.getName().equals(name.getText())) {
                 w.completeWork();
                 JOptionPane.showMessageDialog(null, "Work Added!!", "Message",
                         JOptionPane.PLAIN_MESSAGE);
             }
+
         }
     }
 
