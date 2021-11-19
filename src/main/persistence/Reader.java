@@ -66,6 +66,6 @@ public class Reader {
         if (completed) {
             w.completeWork();
         }
-        wtd.addWork(w);
+        wtd.addWork(w.getName());
     }
 }

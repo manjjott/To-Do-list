@@ -16,11 +16,11 @@ public class WorkToDo implements Writable {
     }
 
 
-
     //MODIFIES: this
     //EFFECTS: Add the work into the work to do list
-    public void addWork(Work w) {
-        this.workList.add(w);
+    public void addWork(String w) {
+        Work work = new Work(w, 1);
+        this.workList.add(work);
     }
 
     //REQUIRES: Atleast one element in the list
@@ -65,7 +65,7 @@ public class WorkToDo implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Work To Do",toDoListToJson());
+        json.put("Work To Do", toDoListToJson());
         return json;
     }
 

@@ -22,6 +22,7 @@ public class Work implements Writable {
         return name;
     }
 
+
     //EFFECTS: Returns if the task is completed or not
     public boolean isCompleted() {
         return completed;
