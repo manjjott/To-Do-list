@@ -21,7 +21,7 @@ public class GUI implements ActionListener {
     private JPanel panel;
     private WorkToDo wl;
     private JTextField name;
-    private JTextField duration;
+    private JTextField time;
     private ImageIcon newIcon;
     private Writer writer;
     private Reader reader;
@@ -95,7 +95,7 @@ public class GUI implements ActionListener {
         back.setBounds(120, 245, 200, 50);
 
         panel.add(name);
-        panel.add(duration);
+        panel.add(time);
         panel.add(add);
         panel.add(back);
         panel.setLayout(null);
@@ -109,10 +109,10 @@ public class GUI implements ActionListener {
     private void addFrameFields() {
 
         name = new JTextField();
-        duration = new JTextField();
+        time = new JTextField();
 
         name.setBounds(120, 20, 100, 40);
-        duration.setBounds(120, 60, 100, 40);
+        time.setBounds(120, 60, 100, 40);
     }
 
     //EFFECTS: creates labels of add work
@@ -130,15 +130,16 @@ public class GUI implements ActionListener {
     //REQUIRES: add different work everytime
     //EFFECTS: adds work with name, duration
     private void add() {
-        int i = Integer.parseInt(duration.getText());
+        photo();
+        int i = Integer.parseInt(time.getText());
         Work work = new Work(name.getText(), i);
         wl.addWork(work);
 
         for (Work w : wl.getWorks()) {
             if (w.getName().equals(name.getText())) {
                 w.completeWork();
-                JOptionPane.showMessageDialog(null, "Work Added!!", "Message",
-                        JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Work Added Successfully !!",
+                        "What happened?", JOptionPane.PLAIN_MESSAGE, newIcon);
             }
 
         }
@@ -176,15 +177,15 @@ public class GUI implements ActionListener {
     private void delete() {
         photo();
         if (!wl.containWork(name.getText())) {
-            JOptionPane.showMessageDialog(null, "Work not in list", "Message",
+            JOptionPane.showMessageDialog(null, "Work not in list", "What happened?",
                     JOptionPane.PLAIN_MESSAGE, newIcon);
         } else {
             wl.deleteWork(name.getText());
             if (!wl.containWork(name.getText())) {
-                JOptionPane.showMessageDialog(null, "Work Deleted", "Message",
+                JOptionPane.showMessageDialog(null, "Work Deleted", "What happened?",
                         JOptionPane.PLAIN_MESSAGE, newIcon);
             } else {
-                JOptionPane.showMessageDialog(null, "Cannot Delete", "Message",
+                JOptionPane.showMessageDialog(null, "Cannot Delete", "What happened?",
                         JOptionPane.PLAIN_MESSAGE, newIcon);
             }
         }
@@ -213,9 +214,9 @@ public class GUI implements ActionListener {
 
     //EFFECTS: creates image icon
     private void photo() {
-        ImageIcon imageIcon = new ImageIcon("todo.png");
+        ImageIcon imageIcon = new ImageIcon("todo2.png");
         Image image = imageIcon.getImage();
-        Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image newImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         newIcon = new ImageIcon(newImage);
     }
 
