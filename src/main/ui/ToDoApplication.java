@@ -140,7 +140,7 @@ public class ToDoApplication {
         System.out.println("Enter time needed for work :");
         time = myObj.nextInt();
         Work w = new Work(name, time);
-        workToDo.addWork(w.getName());
+        workToDo.addWork(w);
         start();
     }
 

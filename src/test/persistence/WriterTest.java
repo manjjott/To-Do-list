@@ -44,8 +44,8 @@ public class WriterTest extends JsonTest{
     void testWriterGeneralWorkToDo() {
         try {
             WorkToDo wr = new WorkToDo();
-            wr.addWork(new Work("a", 100).getName());
-            wr.addWork(new Work("b", 69).getName());
+            wr.addWork(new Work("a", 100));
+            wr.addWork(new Work("b", 69));
             Writer writer = new Writer("./data/testWriterGeneral.json");
             writer.open();
             writer.write(wr);
