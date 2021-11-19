@@ -61,6 +61,17 @@ public class WorkToDo implements Writable {
         return workList;
     }
 
+    //EFFECTS: check whether work is in the list
+    public boolean containWork(String s) {
+        for (Work w : workList) {
+            if (w.getName().equals(s)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

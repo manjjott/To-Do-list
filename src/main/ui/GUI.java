@@ -22,72 +22,65 @@ public class GUI implements ActionListener {
     private WorkToDo wl;
     private JTextField name;
     private JTextField duration;
-    private Writer jsonWriter;
-    private Reader jsonReader;
+    private ImageIcon newIcon;
+    private Writer writer;
+    private Reader reader;
     private static final String JSON_STORE = "./data/worktodo.json";
     private JButton back;
-    private ImageIcon newIcon;
 
     //EFFECTS: creates the main frame and panel
-    public GUI() {
+    public GUI() throws FileNotFoundException {
         wl = new WorkToDo();
-        jsonWriter = new Writer(JSON_STORE);
-        jsonReader = new Reader(JSON_STORE);
+        writer = new Writer(JSON_STORE);
+        reader = new Reader(JSON_STORE);
         frame = new JFrame("To-DO Application");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(500, 155);
         panel = new JPanel();
 
         back = new JButton("Back");
         back.setActionCommand("back");
         back.addActionListener(this);
 
-        titleBar();
-        guiButtons();
+
+        buttons();
 
         frame.add(panel);
         frame.setVisible(true);
     }
 
-    private void titleBar() {
-        JMenuBar m = new JMenuBar();
-        JMenu mj = new JMenu("Save/Load");
-        JMenuItem save = new JMenuItem("Save Work");
-        JMenuItem load = new JMenuItem("Load Work");
+    //EFFECTS: creates the buttons for the frame
+    private void buttons() {
+        JButton add = new JButton("Add Work");
+        JButton delete = new JButton("Delete Work");
+        JButton view = new JButton("View Work");
+        JButton save = new JButton("Save Work");
+        JButton load = new JButton("Load Work");
+
+        add.setActionCommand("add work");
+        add.addActionListener(this);
+
+        view.setActionCommand("view work");
+        view.addActionListener(this);
+
+        delete.setActionCommand("delete work");
+        delete.addActionListener(this);
 
         save.setActionCommand("save");
         save.addActionListener(this);
+
         load.setActionCommand("load");
         load.addActionListener(this);
 
-        m.add(mj);
-        mj.add(save);
-        mj.add(load);
-        frame.add(BorderLayout.EAST, m);
-    }
-
-
-    private void guiButtons() {
-        JButton add = new JButton("Add Work");
-        JButton delete = new JButton("Remove Work");
-        JButton view = new JButton("View Work");
-
-        add.setActionCommand("Add Work");
-        add.addActionListener(this);
-
-        view.setActionCommand("View Work");
-        view.addActionListener(this);
-
-        delete.setActionCommand("Delete Work");
-        delete.addActionListener(this);
-
         panel.add(add);
         panel.add(delete);
-        panel.add(delete);
+        panel.add(view);
+        panel.add(save);
+        panel.add(load);
     }
 
     //EFFECTS: creates the add frame and panel
-    private void addWorkFrame() {
+    private void addFrame() {
         frame = new JFrame();
         frame.setSize(400, 400);
         panel = new JPanel();
@@ -96,10 +89,10 @@ public class GUI implements ActionListener {
         addFrameLabels();
 
         JButton add = new JButton("Add Work");
-        add.setActionCommand("Add Work");
+        add.setActionCommand("add");
         add.addActionListener(this);
-        add.setBounds(150, 210, 80, 40);
-        back.setBounds(150, 210, 60, 40);
+        add.setBounds(120, 200, 200, 50);
+        back.setBounds(120, 245, 200, 50);
 
         panel.add(name);
         panel.add(duration);
@@ -121,35 +114,50 @@ public class GUI implements ActionListener {
         name.setBounds(120, 20, 100, 40);
         duration.setBounds(120, 60, 100, 40);
     }
+
     //EFFECTS: creates labels of add work
-
     private void addFrameLabels() {
-        JLabel l1 = new JLabel("Name of Work");
-        JLabel l2 = new JLabel("Duration of Work");
+        JLabel l1 = new JLabel("Name");
+        JLabel l2 = new JLabel("Duration");
 
-        l1.setBounds(100, 40, 200, 60);
-        l2.setBounds(100, 40, 200, 60);
+        l1.setBounds(50, 10, 100, 35);
+        l2.setBounds(50, 50, 100, 35);
 
         panel.add(l1);
         panel.add(l2);
     }
 
-    //EFFECTS: creates remove work frame and panel
+    //REQUIRES: add different work everytime
+    //EFFECTS: adds work with name, duration
+    private void add() {
+        photo();
+        int i = Integer.parseInt(duration.getText());
+        Work work = new Work(name.getText(), i);
+        wl.addWork(work);
+        for (Work w : wl.getWorks()) {
+            if (w.getName().equals(name.getText())) {
+                w.completeWork();
+                JOptionPane.showMessageDialog(null, "Work Added!!", "Message",
+                        JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+    }
 
-    public void deleteWorkFrame() {
+    //EFFECTS: creates remove work frame and panel
+    public void deleteFrame() {
         frame = new JFrame();
         frame.setSize(325, 175);
 
         panel = new JPanel();
         name = new JTextField();
 
-        JLabel label = new JLabel("Name of Work");
+        JLabel label = new JLabel("Name");
         label.setBounds(50, 20, 80, 40);
         name.setBounds(120, 30, 103, 33);
-        JButton delete = new JButton("Delete");
+        JButton delete = new JButton("Delete Work");
         delete.setBounds(120, 75, 104, 33);
         back.setBounds(120, 100, 105, 35);
-        delete.setActionCommand("Delete Work");
+        delete.setActionCommand("delete");
         delete.addActionListener(this);
 
         panel.add(label);
@@ -162,52 +170,61 @@ public class GUI implements ActionListener {
         frame.setVisible(true);
     }
 
+    //MODIFIES: wl
+    //EFFECTS: delete work with the entered name
+    private void delete() {
+        photo();
+        if (!wl.containWork(name.getText())) {
+            JOptionPane.showMessageDialog(null, "Work not in list", "Message",
+                    JOptionPane.PLAIN_MESSAGE, newIcon);
+        } else {
+            wl.deleteWork(name.getText());
+            if (!wl.containWork(name.getText())) {
+                JOptionPane.showMessageDialog(null, "Work Deleted", "Message",
+                        JOptionPane.PLAIN_MESSAGE, newIcon);
+            } else {
+                JOptionPane.showMessageDialog(null, "Cannot Delete", "Message",
+                        JOptionPane.PLAIN_MESSAGE, newIcon);
+            }
+        }
+    }
+
     //EFFECTS: creates the view frame and panel
-    public void viewWorkFrame() {
+    public void viewFrame() {
         frame = new JFrame();
         panel = new JPanel();
         String str;
         List<String> formatted = new ArrayList<>();
         if (wl.getWorks() != null) {
             for (Work o : wl.getWorks()) {
-                str = "Name of Work:" + o.getName() + " " + "Duration of Work" + o.getTime();
+                str = "Name of Work:" + o.getName() + " " + "Duration of Work:" + o.getTime();
                 formatted.add(str);
             }
         }
 
         JList<Object> j = new JList<>(formatted.toArray());
         panel.add(j);
-        frame.add(panel);
         panel.add(BorderLayout.SOUTH, back);
+        frame.add(panel);
         frame.pack();
         frame.setVisible(true);
     }
 
     //EFFECTS: creates image icon
-    private void icon() {
-        ImageIcon imageIcon = new ImageIcon("to-do-list-apps.png");
+    private void photo() {
+        ImageIcon imageIcon = new ImageIcon("todo.png");
         Image image = imageIcon.getImage();
-        Image newImage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         newIcon = new ImageIcon(newImage);
     }
 
-    //EFFECTS: adds work with name, duration
-    private void add() {
-        int i = Integer.parseInt(duration.getText());
-
-        Work work = new Work(name.getText(), i);
-        wl.addWork(work);
-        icon();
-
-        //Have to add something here urgently!!!
-    }
 
     //EFFECTS: save wl to file
     private void save() {
         try {
-            jsonWriter.open();
-            jsonWriter.write(wl);
-            jsonWriter.close();
+            writer.open();
+            writer.write(wl);
+            writer.close();
             System.out.println("Saved " + wl + " to " + JSON_STORE);
         } catch (FileNotFoundException ev) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -218,7 +235,7 @@ public class GUI implements ActionListener {
     //EFFECTS: load wl from the file
     private void load() {
         try {
-            wl = jsonReader.read();
+            wl = reader.read();
 
             System.out.println("Loaded " + wl + " from " + JSON_STORE);
 
@@ -228,43 +245,35 @@ public class GUI implements ActionListener {
         }
     }
 
-    private void remove(){
-
-
-    }
-
-    private void toDo(){
-
-
-    }
-
-
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("add order")) {
-            addWorkFrame();
-        } else if (e.getActionCommand().equals("Add Work")) {
+        if (e.getActionCommand().equals("add work")) {
+            addFrame();
+        } else if (e.getActionCommand().equals("add")) {
             add();
-        } else if (e.getActionCommand().equals("View Work")) {
-            viewWorkFrame();
-        } else if (e.getActionCommand().equals("Save Work")) {
+        } else if (e.getActionCommand().equals("view work")) {
+            viewFrame();
+        } else if (e.getActionCommand().equals("save")) {
             save();
-        } else if (e.getActionCommand().equals("Load Work")) {
+        } else if (e.getActionCommand().equals("load")) {
             load();
-        } else if (e.getActionCommand().equals("Delete Work")) {
-            deleteWorkFrame();
-        } else if (e.getActionCommand().equals("remove")) {
-            remove();
+        } else if (e.getActionCommand().equals("delete work")) {
+            deleteFrame();
+        } else if (e.getActionCommand().equals("delete")) {
+            delete();
         } else if (e.getActionCommand().equals("back")) {
             frame.dispose();
-        } else if (e.getActionCommand().equals("ats")) {
-            toDo();
         }
     }
 
+    //EFFECTS: runs the gui
     public static void main(String[] args) {
-        new GUI();
+        try {
+            new GUI();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to run GUI: file not found");
+        }
     }
 }

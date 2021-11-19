@@ -74,8 +74,22 @@ public class WorkToDoTest {
         lists.addWork(physics);
         lists.addWork(chemistry);
         lists.addWork(maths);
-       // lists.getWorks();
+        lists.getWorks();
         assertEquals(3, lists.getWorks().size());
+    }
+
+    @Test
+
+    public void testContainWork(){
+        lists.addWork(physics);
+        lists.addWork(chemistry);
+        lists.addWork(maths);
+        assertEquals(3,lists.sizeOfList());
+        assertTrue(lists.containWork("physics"));
+        assertTrue(lists.containWork("chemistry"));
+        assertTrue(lists.containWork("maths"));
+
+
     }
 
 }
