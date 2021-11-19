@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WorkToDoTest {
 
@@ -88,6 +87,8 @@ public class WorkToDoTest {
         assertTrue(lists.containWork("physics"));
         assertTrue(lists.containWork("chemistry"));
         assertTrue(lists.containWork("maths"));
+        lists.deleteWork("physics");
+        assertFalse(lists.containWork("physics"));
 
 
     }
