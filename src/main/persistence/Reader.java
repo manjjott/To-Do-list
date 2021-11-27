@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.Work;
 import model.WorkToDo;
 import org.json.JSONArray;
@@ -25,6 +27,7 @@ public class Reader {
     public WorkToDo read() throws IOException {
         String jsonData = readFile(origin);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("File Loaded!!"));
         return parseWorkToDo(jsonObject);
     }
 

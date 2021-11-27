@@ -1,10 +1,14 @@
 package ui;
 
+import model.EventLog;
 import model.Work;
 import model.WorkToDo;
 import persistence.Reader;
 import persistence.Writer;
+import model.Event;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 //GUI of To-Do Application
 public class GUI implements ActionListener {
@@ -45,8 +50,10 @@ public class GUI implements ActionListener {
 
         buttons();
 
+
         frame.add(panel);
         frame.setVisible(true);
+        frameWindowListener();
     }
 
     //EFFECTS: creates the buttons for the frame
@@ -57,18 +64,15 @@ public class GUI implements ActionListener {
         JButton save = new JButton("Save Work");
         JButton load = new JButton("Load Work");
 
+
         add.setActionCommand("add work");
         add.addActionListener(this);
-
         view.setActionCommand("view work");
         view.addActionListener(this);
-
         delete.setActionCommand("delete work");
         delete.addActionListener(this);
-
         save.setActionCommand("save");
         save.addActionListener(this);
-
         load.setActionCommand("load");
         load.addActionListener(this);
 
@@ -77,6 +81,7 @@ public class GUI implements ActionListener {
         panel.add(view);
         panel.add(save);
         panel.add(load);
+
     }
 
     //EFFECTS: creates the add frame and panel
@@ -198,8 +203,8 @@ public class GUI implements ActionListener {
         String str;
         List<String> formatted = new ArrayList<>();
         if (wl.getWorks() != null) {
-            for (Work o : wl.getWorks()) {
-                str = "Name of Work:" + o.getName() + " " + "Duration of Work:" + o.getTime();
+            for (Work w : wl.getWorks()) {
+                str = "Name of Work:" + w.getName() + " " + "Duration of Work:" + w.getTime();
                 formatted.add(str);
             }
         }
@@ -219,7 +224,6 @@ public class GUI implements ActionListener {
         Image newImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         newIcon = new ImageIcon(newImage);
     }
-
 
     //EFFECTS: save wl to file
     private void save() {
@@ -247,8 +251,6 @@ public class GUI implements ActionListener {
         }
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("add work")) {
@@ -267,6 +269,27 @@ public class GUI implements ActionListener {
             delete();
         } else if (e.getActionCommand().equals("back")) {
             frame.dispose();
+        }
+    }
+
+    //EFFECTS: prints logged  when program exited
+    public void frameWindowListener() {
+
+        frame.addWindowListener(new WindowAdapter() {
+
+            public void windowClosing(WindowEvent e) {
+                logPrint(EventLog.getInstance());
+                System.exit(0);
+
+            }
+        });
+
+    }
+
+    //EFFECTS: prints events logged
+    private void logPrint(EventLog instance) {
+        for (Event next : instance) {
+            System.out.println(next.toString());
         }
     }
 

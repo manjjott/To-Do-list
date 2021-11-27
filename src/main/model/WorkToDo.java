@@ -20,6 +20,7 @@ public class WorkToDo implements Writable {
     //EFFECTS: Add the work into the work to do list
     public void addWork(Work w) {
         this.workList.add(w);
+        EventLog.getInstance().logEvent(new Event("Work Added !!"));
     }
 
     //REQUIRES: Atleast one element in the list
@@ -29,6 +30,7 @@ public class WorkToDo implements Writable {
         for (int i = 0; i < workList.size(); i++) {
             if (w.equals(workList.get(i).getName())) {
                 workList.remove(i);
+                EventLog.getInstance().logEvent(new Event("Work Deleted !!"));
             }
         }
     }

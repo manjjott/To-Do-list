@@ -25,7 +25,7 @@ public class Work implements Writable {
 
     //EFFECTS: Returns if the task is completed or not
     public boolean isCompleted() {
-        return completed;
+        return this.completed;
     }
 
     // EFFECTS: Returns time needed for work to complete
