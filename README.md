@@ -17,3 +17,17 @@
 >><li> Able to save my works to a file </li>
 >><li> Able to load my works from file</li>
 >></ol> 
+
+>>###_Phase 4_
+>> Example of Logging Events:
+>><p>Fri Nov 26 16:25:20 PST 2021 
+>>Work Added !! </p>
+>><p>Fri Nov 26 16:25:26 PST 2021
+>>Work Added !! </p>
+>><p>Fri Nov 26 16:25:38 PST 2021
+>>Work Added !!</p>
+>><p>Fri Nov 26 16:25:49 PST 2021
+>>Work Deleted !! </p>
+>><p>Fri Nov 26 16:26:06 PST 2021
+>>File Saved !!! </p>
+>>

@@ -32,7 +32,7 @@ public class Writer {
     public void write(WorkToDo wtd) {
         JSONObject json = wtd.toJson();
         saveToFile(json.toString(TAB));
-        EventLog.getInstance().logEvent(new Event("File Saved"));
+        EventLog.getInstance().logEvent(new Event("File Saved !!!"));
     }
 
     // MODIFIES: this

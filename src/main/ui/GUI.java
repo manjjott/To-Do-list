@@ -80,6 +80,7 @@ public class GUI implements ActionListener {
         panel.add(delete);
         panel.add(view);
         panel.add(save);
+
         panel.add(load);
 
     }
