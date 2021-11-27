@@ -18,7 +18,7 @@
 >><li> Able to load my works from file</li>
 >></ol> 
 
->>###_Phase 4_
+>>###_Phase 4: Task 2_
 >> Example of Logging Events:
 >><p>Fri Nov 26 16:25:20 PST 2021 
 >>Work Added !! </p>
@@ -31,3 +31,6 @@
 >><p>Fri Nov 26 16:26:06 PST 2021
 >>File Saved !!! </p>
 >>
+
+>>###_Phase 4: Task 3_
+>> One thing my project lacks is exception handling.
